@@ -5,7 +5,7 @@ console.log('App.js is running!');
 // JSX - JavaScript XML
 
 var app = {
-    title: 'Indecision app',
+    title: 'Indecision app!',
     subtitle: 'This is some info!',
     options: []
 };
@@ -24,6 +24,11 @@ var onFormSubmit = function onFormSubmit(e) {
 var removeAll = function removeAll() {
     app.options = [];
     renderApp();
+};
+
+var onMakeDesecion = function onMakeDesecion() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randomNum];
 };
 
 var appRoot = document.getElementById('app');
@@ -48,9 +53,9 @@ var renderApp = function renderApp() {
             app.options.length > 0 ? 'Here are you options' : 'No options yet'
         ),
         React.createElement(
-            'p',
-            null,
-            app.options.length
+            'button',
+            { disabled: app.options.length === 0, onClick: onMakeDesecion },
+            'What should I do'
         ),
         React.createElement(
             'button',

@@ -3,7 +3,7 @@ console.log('App.js is running!');
 // JSX - JavaScript XML
 
 const app = {
-    title: 'Indecision app',
+    title: 'Indecision app!',
     subtitle: 'This is some info!',
     options: []
 }
@@ -24,21 +24,25 @@ const removeAll = () => {
     renderApp();
 }
 
+const onMakeDesecion = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length); 
+    const option = app.options[randomNum]
+}
+
 const appRoot = document.getElementById('app');
+
 
 const renderApp = () => {
     const template = (
         <div>  
             <h1>{app.title}</h1>
             {app.subtitle && <p>{app.subtitle}</p>}
-            <p>{app.options.length > 0 ? 'Here are you options' : 'No options yet'}</p> 
-            <p>{app.options.length}</p>      
-            <button onClick={removeAll}>Remove all</button>
+            <p>{app.options.length > 0 ? 'Here are you options' : 'No options yet'}</p>             
+            <button disabled={app.options.length === 0} onClick={onMakeDesecion}>What should I do</button>          
+            <button onClick={removeAll}>Remove all</button>            
             <ol>
                 {app.options.length > 0 && app.options.map((option, i)=> {
-                    return (
-                        <li key={i}>{option}</li>
-                    )
+                    return <li key={i}>{option}</li>
                 })}            
             </ol>
             <form onSubmit={onFormSubmit}>
@@ -46,8 +50,7 @@ const renderApp = () => {
                 <button>Add Option</button>
             </form>
         </div>
-    ); 
-   
+    );    
     
     ReactDOM.render(template, appRoot)
 }
